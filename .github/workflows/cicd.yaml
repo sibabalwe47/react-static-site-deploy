@@ -31,10 +31,13 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: file path
+        run: pwd
+
       - name: Deploy static build
         uses: imehedi/actions-awscli-v2@latest
         with:
-          args: aws s3 cp ${{ secrets.AWS_S3_STATIC_SITE_BUCKET }} s3://s3_bucket_name/ --recursive
+          args: aws s3 cp dist s3://${{ secrets.AWS_S3_STATIC_SITE_BUCKET }} --recursive
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
